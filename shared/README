@@ -1,0 +1,54 @@
+========== OpenNF: Enabling Innovation in Network Function Control ==========
+==========                http://opennf.cs.wisc.edu                ==========
+==========                 Shared Library for NFs                  ========== 
+
+===== OVERVIEW ==============================================================
+This README provides inforamtion about the OpenNF Shared Library. See the 
+OpenNF website (http://opennf.cs.wisc.edu) for other OpenNF code and research
+publications.
+
+===== LICENSE ===============================================================
+See the LICENSE file.
+
+===== COMPILATION ===========================================================
+1) Install the necessary libraries and compilation tools:
+    - gcc
+    - cmake
+    - Pthread library
+    - JSON-C library
+
+2) Run "make install"
+
+By default, the library, header file, and configuration file will be 
+installed in "/usr/local/lib", "/usr/local/include", and "/usr/local/etc", 
+respectively. You can change the install location to something other than 
+"/usr/local" by setting the environment variable "PREFIX" to the desired path.
+
+===== CONFIGURATION =========================================================
+The OpenNF shared library reads a configuration file to determine the IP
+address and ports to use to connect to the OpenNF controller. By default, the
+configuration file is located at "/usr/local/etc/sdmbn.conf". 
+
+The configuration file specifies the following:
+    - ctrl_ip -- the IP address of the OpenNF controller
+    - ctrl_port_state -- the port to use for the state socket connection;
+        this should match the state port specified in the controller
+        configuration
+    - ctrl_port_event -- the port to use for the event socket connection;
+        this should match the event port specified in the controller
+        configuration
+    - release_get_pkts -- this specifies whether the shared library should
+        wait to handle any getPerflow calls until at least a minimum number
+        of packets have been received; a value of -1 implies no waiting
+        should occur; a positive integer indicates the NF should have
+        recenved at least that many packets before handling a getPerflow
+        call; this option is primarily used to testing and benchmarking
+    - release_get_flows -- same as the "release_get_pkts" option, except this
+        is used to specify the number of active flows that should be present
+        before a getPerflow call is processed; if both release_get_pkts and
+        release_get_flows are set to positive integers, then a pending
+        getPerflow call will be processed as soon as one of the two
+        thresholds is reached
+
+===== RUN ===================================================================
+The shared library is linked into NFs and not run by itself.

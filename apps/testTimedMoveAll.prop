@@ -1,0 +1,24 @@
+floodlight.modules = net.floodlightcontroller.storage.memory.MemoryStorageSource,\
+net.floodlightcontroller.core.FloodlightProvider,\
+net.floodlightcontroller.threadpool.ThreadPool,\
+net.floodlightcontroller.staticflowentry.StaticFlowEntryPusher,\
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager,\
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll,\
+net.floodlightcontroller.counter.CounterStore,\
+net.floodlightcontroller.perfmon.PktInProcessingTime
+net.floodlightcontroller.restserver.RestApiServer.port = 8080
+net.floodlightcontroller.core.FloodlightProvider.openflowport = 6633
+net.floodlightcontroller.forwarding.Forwarding.idletimeout = 5
+net.floodlightcontroller.forwarding.Forwarding.hardtimeout = 0
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.stateport = 7790
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.eventport = 7791
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplaySwitchPort = 1
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayHost = 192.168.0.1
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayFile = youtube.pcap
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayRate = 500
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayNumPkts = -1
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.OperationDelay = 2
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.StopDelay = 10
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.Scope = PERFLOW
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.Guarantee = ORDER_PRESERVING
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.Optimization = PZ_LL_ER

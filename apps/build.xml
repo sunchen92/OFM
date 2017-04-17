@@ -1,0 +1,40 @@
+<project name="SDMBNapps" default="dist">
+    <property name="main-class" value="net.floodlightcontroller.core.Main" />
+    <property name="srcs" value="src/" />
+
+    <!-- Use JDK 1.6 for compiling -->
+    <property name="ant.build.javac.source" value="1.6"/>
+    <property name="ant.build.javac.target" value="1.6"/>
+
+    <!-- Initialize build environment -->
+    <target name="init">
+        <mkdir dir="bin/" />
+    </target>
+
+    <!-- Compile -->
+    <target name="compile" depends="init">
+        <javac includeantruntime="false" srcdir="${srcs}" destdir="bin/" 
+            debug="on">
+            <classpath>
+                <fileset dir="../controller" includes="SDMBN.jar" />
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- Build JAR file -->
+    <target name="dist" depends="compile">
+        <jar destfile="${ant.project.name}.jar">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}" />
+                <attribute name="Class-Path" value="." />
+            </manifest>
+            <fileset dir="bin/" />
+            <zipgroupfileset dir="../controller" includes="SDMBN.jar" />
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="bin/" />
+        <delete file="${ant.project.name}.jar" />
+    </target>
+</project>

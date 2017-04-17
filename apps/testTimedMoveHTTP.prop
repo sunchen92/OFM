@@ -1,0 +1,23 @@
+floodlight.modules = net.floodlightcontroller.storage.memory.MemoryStorageSource,\
+net.floodlightcontroller.core.FloodlightProvider,\
+net.floodlightcontroller.threadpool.ThreadPool,\
+net.floodlightcontroller.staticflowentry.StaticFlowEntryPusher,\
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager,\
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP,\
+net.floodlightcontroller.counter.CounterStore,\
+net.floodlightcontroller.perfmon.PktInProcessingTime
+net.floodlightcontroller.restserver.RestApiServer.port = 8080
+net.floodlightcontroller.core.FloodlightProvider.openflowport = 6633
+net.floodlightcontroller.forwarding.Forwarding.idletimeout = 5
+net.floodlightcontroller.forwarding.Forwarding.hardtimeout = 0
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.stateport = 7790
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.eventport = 7791
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.TraceReplaySwitchPort = 13
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.TraceReplayHost = artaud
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.TraceReplayFile = largeflows.pcap
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.TraceReplayRate = 20000
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.MoveDelay = 180
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.StopDelay = 180
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.Scope = PERFLOW
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.Guarantee = NONE
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP.Optimization = PZ

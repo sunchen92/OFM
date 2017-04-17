@@ -1,0 +1,19 @@
+floodlight.modules = net.floodlightcontroller.storage.memory.MemoryStorageSource,\
+net.floodlightcontroller.core.FloodlightProvider,\
+net.floodlightcontroller.threadpool.ThreadPool,\
+net.floodlightcontroller.counter.CounterStore,\
+net.floodlightcontroller.perfmon.PktInProcessingTime, \
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager,\
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.stateport = 7790
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.eventport = 7791
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplaySwitchPort = 1
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayHost = 10.0.0.1
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayFile = trace.pcap
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayRate = 500
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.TraceReplayNumPkts = -1
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.OperationDelay = 20
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.StopDelay = 20
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.Scope = PERFLOW
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.Guarantee = ORDER_PRESERVING
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll.Optimization = PZ_LL_ER

@@ -1,0 +1,82 @@
+========== OpenNF: Enabling Innovation in Network Function Control ==========
+==========                http://opennf.cs.wisc.edu                ==========
+==========                  Control Applications                   ========== 
+
+===== OVERVIEW ==============================================================
+This README provides inforamtion about the OpenNF control applications. See 
+the OpenNF website (http://opennf.cs.wisc.edu) for other OpenNF code and 
+research publications.
+
+===== LICENSE ===============================================================
+See the LICENSE file.
+
+===== COMPILATION ===========================================================
+1) Install the necessary compilation tools:
+    - Java Development Kit
+    - Apache Ant
+
+2) Download and compile the OpenNF controller.
+
+3) Tell Floodlight about the existence of the sample OpenNF control 
+   applications by adding the following line to the Floodlight source file 
+   "floodlight/src/main/resources/META-INF/services/net.floodlightcontroller.core.module.IFloodlightModule":
+        edu.wisc.cs.wisdom.sdmbn.apps.testing.TestShareStrong
+        edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedCopyAll
+        edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveHTTP
+        edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedMoveAll
+        edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll
+
+3) Recompile Floodlight and the OpenNF controller. 
+
+4) Compile the OpenNF control applications by running:
+        ant
+
+An Eclipse .project file is included with the code. You can use Eclipse's
+"Import Existing Project into Workspace" feature to view and edit the
+control application code in Eclipse.
+
+===== CONFIGURATION =========================================================
+A configuration file must be provided when launching Floodlight to indicate
+that an OpenNF control application should be started and to provide some 
+basic configuration for the application. Several sample configuration files, 
+ending in *.prop are included with the control application code.
+
+As an example, look at "sampleTestTimedMoveAll.prop". This configuration is 
+for an application that waits for two NFs to connect, replays a trace file at 
+a specific rate, moves all state of a specific scope after a set time period 
+has passed, and stops replaying the trace after another time period.  The 
+configuration file for this application includes the same paramters as the 
+controller-only configuration file included in the controller code. It also 
+includes many settings specific to this application, all of which start with 
+"edu.wisc.cs.sdmbn.apps.testing.TestTimedMoveAll":
+    - TraceReplaySwitchPort -- the switch port to which the host replaying 
+        the trace file is connected
+    - TraceReplayHost -- the IP address for the host replaying the trace file
+    - TraceReplayFile -- the name of the trace file to replay
+    - TraceReplayRate -- the rate at which to replay the trace, in packets
+        per second
+    - TraceReplayNumPkts -- the maximum number of packets to replay; -1 if
+        the replay should continue until either it is stopped or the entire
+        file has been replayed
+    - OperationDelay -- how many seconds to wait after the trace replay
+        starts before issuing the move operation
+    - StopDelay -- how many seconds to wait after issuing the move oepration
+        before stopping the trace replay
+    - Scope -- the scope of state to move; can be PERFLOW or MULTIFLOW
+    - Guarantee -- which guarantees to enforce during the move operation; can
+        be NO_GUARANTEE, LOSS_FREE, or ORDER_PRESERVING
+    - Optimization -- which optimizations to apply during the move operation;
+        can be NO_OPTIMIZATION, PZ (for parallelize), LL (for late-locking), 
+        PZ_LL (for parallelize + late-locking), or PZ_LL_ER (for parallelize
+        + late-locking + early-release
+
+===== RUN ===================================================================
+You can run the OpenNF control application and controller using the following 
+command:
+    java -jar SDMBNapps.jar -cf sampleTestTimedMoveAll.prop
+This will launch Floodlight and the OpenNF controller module, allowing
+OpenFlow switches and NFs to connect. For this particular application, you
+should then run traceload_server.sh on the trace replay host and start two
+instances of the same NF on some hosts. The log file will show the NFs 
+connecting, the trace replaying starting, the move operation occuring, and 
+the trace replaying stopping.

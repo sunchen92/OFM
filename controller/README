@@ -1,0 +1,58 @@
+========== OpenNF: Enabling Innovation in Network Function Control ==========
+==========                http://opennf.cs.wisc.edu                ==========
+==========                      NF Controller                      ========== 
+
+===== OVERVIEW ==============================================================
+This README provides inforamtion about the OpenNF Controller. See the OpenNF 
+website (http://opennf.cs.wisc.edu) for other OpenNF code and research
+publications.
+
+===== LICENSE ===============================================================
+See the LICENSE file.
+
+===== COMPILATION ===========================================================
+1) Download the required libraries:
+    - Floodlight 0.9.0
+        http://www.projectfloodlight.org/download/
+    - Google GSON
+        https://code.google.com/p/google-gson/downloads/list
+
+2) Install the necessary compilation tools:
+    - Java Development Kit
+    - Apache Ant
+
+3) Tell Floodlight about the existence of the OpenNF controller module by 
+   adding the following line to the Floodlight source file "floodlight/src/main/resources/META-INF/services/net.floodlightcontroller.core.module.IFloodlightModule":
+        edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager
+
+4) Compile Floodlight and copy floodlight-0.90/target/floodlight.jar into
+   the libs directory for the OpenNF controller.
+
+5) Also place the JAR files for Google GSON in the libs directory for the
+    OpenNF controller.
+
+6) Compile the OpenNF controller by running:
+        ant
+
+===== CONFIGURATION =========================================================
+A configuration file must be provided when launching Floodlight to indicate
+that the OpenNF controller module should be started and to provide some basic
+configuration for this module. A sample configuration file, "sdmbn.prop", is 
+included with the controller code.
+
+The last three lines of the same configuration file are specific to OpenNF.
+First, the module "edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager", which is the
+OpenNF controller module, is appended to the list of modules.  Second, the 
+ports to use for the state and event socket connections from NFs are set 
+using the keys "edu.wisc.cs.wisdom.sdmbn.core.Sdmbnmanager.stateport" and 
+"edu.wisc.cs.wisdom.sdmbn.core.Sdmbnmanager.eventport".
+
+===== RUN ===================================================================
+You can run the OpenNF controller using the following command:
+    java -jar SDMBN.jar -cf sdmbn.properties
+This will launch Floodlight and the OpenNF controller module, allowing
+OpenFlow switches and NFs to connect. However, no OpenNF applications will be
+launched with the sample configuration file. Download the "Applications" code 
+from the OpenNF website for sample applications and instructions on how to 
+launch OpenNF applications when the controller is launched.
+        

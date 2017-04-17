@@ -1,0 +1,8 @@
+floodlight.modules = net.floodlightcontroller.storage.memory.MemoryStorageSource,\
+net.floodlightcontroller.core.FloodlightProvider,\
+net.floodlightcontroller.threadpool.ThreadPool,\
+net.floodlightcontroller.counter.CounterStore,\
+net.floodlightcontroller.perfmon.PktInProcessingTime,\
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.stateport = 7790
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.eventport = 7791

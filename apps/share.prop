@@ -1,0 +1,25 @@
+floodlight.modules = net.floodlightcontroller.storage.memory.MemoryStorageSource,\
+net.floodlightcontroller.core.FloodlightProvider,\
+net.floodlightcontroller.threadpool.ThreadPool,\
+net.floodlightcontroller.staticflowentry.StaticFlowEntryPusher,\
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager,\
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll,\
+net.floodlightcontroller.counter.CounterStore,\
+net.floodlightcontroller.perfmon.PktInProcessingTime
+net.floodlightcontroller.restserver.RestApiServer.port = 8680
+net.floodlightcontroller.core.FloodlightProvider.openflowport = 6604
+net.floodlightcontroller.forwarding.Forwarding.idletimeout = 5
+net.floodlightcontroller.forwarding.Forwarding.hardtimeout = 0
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.stateport = 7690
+edu.wisc.cs.wisdom.sdmbn.core.SdmbnManager.eventport = 7691
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.TraceReplaySwitchPort = 13
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.TraceReplayHost = 10.0.1.89
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedCopyAll.TraceReplayPort = 8080
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.TraceReplayFile = largeflows.pcap
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.TraceReplayRate = 80
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.TraceReplayNumPkts = -1
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.OperationDelay = 5
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.StopDelay = 5
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.Scope = MULTIFLOW
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.Consistency = STRONG
+edu.wisc.cs.wisdom.sdmbn.apps.testing.TestTimedShareAll.numInstances = 4
