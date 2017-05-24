@@ -65,7 +65,7 @@ public class MoveOperation extends Operation
 	
 	// Statistics
 	private boolean isFirstStateRcvd;
-	private long moveStart;
+	private double moveStart;
 	private int srcEventCount;
 	private volatile int packetCount;
 	
@@ -111,6 +111,7 @@ public class MoveOperation extends Operation
 	@Override
     public int execute()
     {
+//		log.info("Move Operation Start");
 		if ((this.guarantee != Guarantee.NO_GUARANTEE) 
 				&& (this.optimization == Optimization.NO_OPTIMIZATION 
 						|| this.optimization == Optimization.PZ))
@@ -169,7 +170,7 @@ public class MoveOperation extends Operation
     {
     	if (!this.isFirstStateRcvd) 
     	{
-    		this.moveStart = System.currentTimeMillis();
+    		this.moveStart = System.nanoTime();
         	log.debug("Move Start ({})", this.getId());
         	this.isFirstStateRcvd = true;
     	}
@@ -278,6 +279,11 @@ public class MoveOperation extends Operation
 	@Override
     public void receiveGetPerflowAck(GetPerflowAckMessage msg) 
     {
+		long moveEnd = System.nanoTime();
+        double moveTime = (moveEnd - this.moveStart)/100000.0;
+        System.out.println(String.format("[MOVE_TIME] elapse=%f, start=%f, end=%f",
+                                        moveTime, this.moveStart/100000.0, moveEnd/100000.0));
+
 		log.debug("Completed state per-flow state get");
         this.getPerflowAcked = true;
         this.getPerflowCount = msg.count;
@@ -346,6 +352,7 @@ public class MoveOperation extends Operation
 		
 		if (completed)
 		{
+
 			log.debug("Completed all state transfer");
 			if (this.guarantee == Guarantee.ORDER_PRESERVING)
 			{ enableEventGeneration(this.dst, Message.CONSTANT_ACTION_BUFFER); }
@@ -465,10 +472,10 @@ public class MoveOperation extends Operation
 			log.info("#events = " + this.srcEventCount);
 			log.info("#packets = " + this.packetCount);
 
-			long moveEnd = System.currentTimeMillis();
-			long moveTime = moveEnd - this.moveStart;
-			log.info(String.format("[MOVE_TIME] elapse=%d, start=%d, end=%d",
-					moveTime, this.moveStart, moveEnd));
+			long moveEnd = System.nanoTime();
+			double moveTime = (moveEnd - this.moveStart)/100000.0;
+			log.info(String.format("[MOVE_TIME] elapse=%f, start=%f, end=%f",
+					moveTime, this.moveStart/100000.0, moveEnd/100000.0));
 
 			this.finish();
 		}
