@@ -21,6 +21,7 @@ http://blog.csdn.net/xsckernel/article/details/8563993
 
 2. Manually install json-c:
 
+```
 apt-get install  git make gcc libtool autoconf automake
  
 git clone https://github.com/json-c/json-c.git
@@ -36,20 +37,23 @@ make
 make install
 
 mv json /usr/include
+```
+
+
 
 3. Compile the shared library for NFs:
-
+```
 cd shared/
 
 make
 
 make install
-
-Update some of the configuration lines in the shared library for NFs configuration file at /usr/local/etc/sdmbn.conf to the appropriate values:
+```
+Update some of the configuration lines in the shared library for NFs configuration file at /usr/local/etc/sdmbn.conf to the appropriate values:
 ctrl_ip = "yourControllerIP"
 
 4. Patch and compile PRADS:
-
+```
 apt-get install libpcre3-dev libpcap-dev python-docutils
 
 git clone https://github.com/gamelinux/prads.git
@@ -63,9 +67,9 @@ patch -p1 < ../prads.patch
 make
 
 make install
-
+```
 5. Patch and compile Bro:
-
+```
 apt-get update
 
 sudo apt-get -y install cmake make gcc g++ flex bison libpcap-dev libssl-dev python-dev swig zlib1g-dev libmagic-dev
@@ -89,37 +93,31 @@ patch -p1 < ../bro.patch
 sh sdmbn_build.sh
 
 export PATH=/usr/local/bro/bin:$PATH
-
+```
 6. Compile iptables:
-
+```
 apt-get install libnetfilter-conntrack-dev
 
 cd iptables-sdmbn
 
 sh sdmbn_build.sh
-
+```
 
 ***** Project Running *****
 
 1. In server0, start the controller application:
-
+```
 java -jar apps/SDMBNapps.jar -cf apps/testTimedMoveAll.prop
-
+```
 2. In server1, start sending packets:
-
+```
 python3 send_tcp.py 200
-
+```
 3. In server2 and server3, start Prads/Bro/iptables:
-
+```
 Prads:  prads -i eth1
 
 Bro: bro -i eth1
 
 iptables: ./iptables-sdmbn -i eth1
-
-
-
-
-
-
-
+```
