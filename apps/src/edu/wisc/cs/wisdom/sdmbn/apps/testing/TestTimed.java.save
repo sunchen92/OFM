@@ -146,11 +146,10 @@ public abstract class TestTimed
 		this.middleboxes = new HashMap<String, Middlebox>();
 		this.activeMbs = new ArrayList<Middlebox>();
 		
-        if (this.tracePort > 0)
-        { this.traceLoad = new TraceLoad(this.traceHost, this.tracePort, this.traceRate, this.traceNumPkts); }
-        else
-        { this.traceLoad = new TraceLoad(this.traceHost, this.traceRate, this.traceNumPkts); }
-	}
+//        if (this.tracePort > 0)
+//        { this.traceLoad = new TraceLoad(this.traceHost, this.tracePort, this.traceRate, this.traceNumPkts); }
+  //      else
+    //    { this.traceLoad = new TraceLoad(this.traceHost, this.traceRate, this.traceNumPkts); /	}
 	
 	@Override
 	public void startUp(FloodlightModuleContext context) 

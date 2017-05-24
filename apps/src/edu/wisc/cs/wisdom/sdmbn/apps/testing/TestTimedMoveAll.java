@@ -64,7 +64,8 @@ public class TestTimedMoveAll extends TestTimed
 		int moveOpId = sdmbnProvider.move(mb1, mb2, key, this.scope, 
 				this.guarantee, this.optimization, this.traceSwitchPort);
 		if (moveOpId >= 0)
-		{ log.info("Initiated move"); }
+		{ log.info("Initiated move");
+		}
 		else
 		{ log.error("Failed to initiate move"); }
 	}
