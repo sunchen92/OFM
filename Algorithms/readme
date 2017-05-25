@@ -1,0 +1,6 @@
+You can modify the simulation parameters in the Main.java
+All algorithms (scale in, scale out, load-balancing) are in the Algorithms.java
+APIs for OpenNF or other flow migration framework are left in the Algorithms.java
+CSVUtils.java is the CSV output class to export the simulation data.
+
+To run the simulation correctly, you need to download the lpsolve and install it.
