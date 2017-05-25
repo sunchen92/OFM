@@ -238,15 +238,16 @@ public abstract class TestTimed
 		{
 			this.initialRuleSetup();
 			log.info("Initial rules installed");
-			boolean started = this.traceLoad.startTrace(this.traceFile);
-			if (started)
-			{ log.info("Started replaying trace"); }
-			else 
-			{ log.error("Failed to start replaying trace"); }
+//	boolean started = this.traceLoad.startTrace(this.traceFile);
+//			if (started)
+//			{ log.info("Started replaying trace"); }
+//			else 
+//			{ log.error("Failed to start replaying trace"); }
 			startNextAfter = this.operationDelay;
 			break;
 		}
 		case 2:
+			log.warn("case 2 init operation");
 			this.initiateOperation();
 			startNextAfter = this.stopDelay; 
 			break;

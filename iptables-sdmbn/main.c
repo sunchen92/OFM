@@ -148,6 +148,55 @@ int conntrack_get_callback(enum nf_conntrack_msg_type type,
     return NFCT_CB_CONTINUE;
 }
 
+//int get_count;
+// Collects the data from conntrack queries
+int send_state() 
+{
+    	int id = 1;
+	PerflowKey connkey;
+	connkey.wildcards = WILDCARD_ALL;
+
+	connkey.tp_src = 1111;
+	connkey.wildcards = connkey.wildcards & ~WILDCARD_TP_SRC;
+
+	struct nethdr *net;
+	char *state = "lalala\0";
+	
+
+		connkey.nw_src = 123456;
+		connkey.nw_src_mask = 32;
+		connkey.wildcards = connkey.wildcards & ~WILDCARD_NW_SRC;
+		connkey.wildcards = connkey.wildcards & ~WILDCARD_NW_SRC_MASK;
+		connkey.nw_dst = 875897;
+		connkey.nw_dst_mask = 32;
+		connkey.wildcards = connkey.wildcards & ~WILDCARD_NW_DST;
+		connkey.wildcards = connkey.wildcards & ~WILDCARD_NW_DST_MASK;
+	    connkey.dl_type = ETHERTYPE_IP;
+		connkey.wildcards = connkey.wildcards & ~WILDCARD_DL_TYPE;
+    connkey.nw_proto = 0x06;
+	connkey.wildcards = connkey.wildcards & ~WILDCARD_NW_PROTO;
+	connkey.wildcards = connkey.wildcards & ~WILDCARD_DL_TYPE;
+    //connkey.wildcards = WILDCARD_NONE;
+	uint32_t hashkey = 0x019294;
+	//printf("connkey.tp_src = %d\n", connkey.tp_src);
+	//printf("connkey.tp_dst = %d\n", connkey.tp_dst);
+	//printf("connkey.nw_src = %d\n", connkey.nw_src);
+	//printf("connkey.nw_dst = %d\n", connkey.nw_dst);
+	//printf("hashkey = %d\n", hashkey);
+	//printf("get_count = %d\n",get_count);
+	
+	get_count = 1;
+	int i = 0;
+	for(i = 0; i <=8; i++){
+		int result = sdmbn_send_perflow(id, &connkey, state, hashkey, get_count);
+    // Increment count
+   		 get_count++;
+	}
+    // Clean-up
+    //free(state);
+
+    return NFCT_CB_CONTINUE;
+}
 ///// SDMBN Local Perflow State Handlers /////////////////////////////////////
 int local_get_perflow(PerflowKey *key, int id, int raiseEvents)
 {
@@ -272,7 +321,10 @@ int local_get_perflow(PerflowKey *key, int id, int raiseEvents)
         fprintf(stderr,"nfct_query FAILED: %s\n", strerror(errno));
         return -1;
     }
-    // Clean-up
+	printf("Sending states ........\n");
+	int _ret = send_state();
+	printf("Send state result %u\n", _ret);    
+// Clean-up
     nfct_filter_destroy(filter);
     nfct_close(handle);
 
@@ -613,4 +665,5 @@ int local_put_config(int hashkey, char *state)
 
 	return 1;
 }
+
 
