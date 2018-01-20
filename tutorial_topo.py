@@ -18,7 +18,9 @@ if __name__ == '__main__':
     setLogLevel( 'info' )
 
     # Create rate limited interface
+    # bw 50 为50Mbps
     intf = custom(TCIntf, bw=50)
+    #CPULimitedHost 带cpu限制的host，cpu限了10%   sched 指定Host的CPU调度方式:rt或者cfs 绝对公平调度算法，CFS(completely fair schedule)
     host = custom(CPULimitedHost, sched='cfs', cpu=0.1)
 
     # Create data network
